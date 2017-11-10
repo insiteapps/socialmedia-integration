@@ -1,0 +1,12 @@
+SiteConfig:
+  extensions:
+    - InsiteApps\Social\SocialMediaExtension
+    - InsiteApps\Social\SocialMediaSiteConfigExtension
+
+Page:
+  extensions:
+    - InsiteApps\Social\SocialMediaPageExtension
+
+Page_Controller:
+  extensions:
+    - InsiteApps\Social\SocialMediaPageControllerExtension

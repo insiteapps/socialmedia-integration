@@ -1,0 +1,7 @@
+/* CSS Document */
+
+#SocialMedia {width:auto;float:right;position:absolute;padding: 10px;}
+#SocialMedia a {
+    display:inline;width:40px;height:40px;float:left;position:relative;
+
+}
