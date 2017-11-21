@@ -1,41 +1,79 @@
 <?php
 
 
-namespace InsiteApps\Social;
+    namespace InsiteApps\SocialMedia;
 
-use DataExtension;
-use GridFieldConfig_RecordEditor;
-use GridFieldSortableRows;
-use GridField;
-use FieldList;
+    use SilverStripe\ORM\DataExtension;
+    use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+    use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
+    use SilverStripe\Forms\GridField\GridField;
+    use SilverStripe\Forms\FieldList;
 
 
-class SocialMediaExtension extends DataExtension
-{
-    
-    /**
-     * @param FieldList $fields
-     */
-    public function updateCMSFields(FieldList $fields)
+    class SocialMediaExtension extends DataExtension
     {
-        
-        $gridFieldConfig = GridFieldConfig_RecordEditor::create();
-        $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
-        $gridfield = new GridField('SocialMedia', 'SocialMedia', $this->owner->SocialMedia(), $gridFieldConfig);
-        $fields->addFieldToTab('Root.SocialMedia', $gridfield);
+
+        /**
+         * @param FieldList $fields
+         */
+        public function updateCMSFields(FieldList $fields)
+        {
+
+            $gridFieldConfig = GridFieldConfig_RecordEditor::create();
+            $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
+            $gridfield = new GridField('SocialMedia', 'SocialMedia', $this->owner->SocialMedia(), $gridFieldConfig);
+            $fields->addFieldToTab('Root.SocialMedia', $gridfield);
+        }
+
+        /**
+         * @param null $type
+         *
+         * @return DataList
+         */
+        public function SocialMediaList($type = null)
+        {
+            $filter = $type ? [$type => true] : [];
+
+            return SocialMedia::get()->filter($filter);
+        }
+
+
     }
-    
-    /**
-     * @param null $type
-     *
-     * @return DataList
-     */
-    function SocialMediaList($type = null)
+
+
+    class SocialMediaPageExtension extends DataExtension
     {
-        $filter = $type ? [$type => true] : [];
-        
-        return \SocialMedia::get()->filter($filter);
+
+        private static $has_many = array(
+            "SocialMedia" => SocialMedia::class,
+        );
     }
-    
-    
-}
+
+    class SocialMediaPageControllerExtension extends DataExtension
+    {
+
+        public function getSocialMedia()
+        {
+            return $this->SocialMedia();
+        }
+
+        public function SiteSocialMedia()
+        {
+            return $this->SocialMedia();
+        }
+
+        public function HeaderTopSocialMedia()
+        {
+            return SocialMedia::get()->filter([
+                "HeaderTop" => true,
+            ]);
+        }
+
+    }
+
+    class SocialMediaSiteConfigExtension extends DataExtension
+    {
+        private static $has_many = array(
+            "SocialMedia" => SocialMedia::class,
+        );
+    }
