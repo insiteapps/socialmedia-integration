@@ -24,13 +24,13 @@
 
             "SiteConfig" => SiteConfig::class,
             "Page"       => \Page::class,
-            "Icon"       => Image::class,
+            //"Icon"       => Image::class,
         );
 
         public function getCMSFields()
         {
             $f = parent::getCMSFields();
-            $f->removeByName(array("SortOrder", "SiteConfigID", "PageID"));
+            $f->removeByName(array( "SortOrder", "SiteConfigID", "PageID" ));
             $f->addFieldToTab("Root.Main", DropdownField::create("Name")
                 ->setSource(self::availableNames())
                 ->setEmptyString('----'), "Link");
