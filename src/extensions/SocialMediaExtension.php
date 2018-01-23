@@ -5,6 +5,7 @@
 
     use SilverStripe\ORM\DataExtension;
     use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+    use SilverStripe\SiteConfig\SiteConfig;
     use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
     use SilverStripe\Forms\GridField\GridField;
     use SilverStripe\Forms\FieldList;
@@ -59,7 +60,8 @@
 
         public function SiteSocialMedia()
         {
-            return $this->SocialMedia();
+            $oSiteConfig = SiteConfig::current_site_config();
+            return $oSiteConfig->SocialMedia();
         }
 
         public function HeaderTopSocialMedia()

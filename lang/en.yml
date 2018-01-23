@@ -1,0 +1,7 @@
+en:
+  InsiteApps\SocialMedia\SocialMedia:
+    PLURALNAME: 'Social Medias'
+    PLURALS:
+      one: 'A Social Media'
+      other: '{count} Social Medias'
+    SINGULARNAME: 'Social Media'
